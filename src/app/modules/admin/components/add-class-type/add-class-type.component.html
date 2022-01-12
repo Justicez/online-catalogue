@@ -1,0 +1,11 @@
+<section>
+  <form [formGroup]="classTypeForm" (ngSubmit)="onSave()">
+    <div>
+      <h3>Name</h3>
+      <input type="text" pInputText formControlName="name" />
+    </div>
+    <h3>
+      <p-button label="Add Class Type" type="submit" [disabled]="!isFormValid"></p-button>
+    </h3>
+  </form>
+</section>

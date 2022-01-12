@@ -1,0 +1,36 @@
+<section>
+  <form [formGroup]="scheduledClassForm" (ngSubmit)="onSave()">
+    <div>
+      <h3>Date</h3>
+      <p-calendar formControlName="date" dateFormat="dd.mm.yy" showTime="true" hourFormat="24" [showIcon]="true">
+      </p-calendar>
+    </div>
+    <div>
+      <h3>Exam</h3>
+      <p-checkbox binary="true" formControlName="isExam"></p-checkbox>
+    </div>
+    <div>
+      <h3>Course</h3>
+      <p-dropdown showClear="true" placeholder="Select Course..." [options]="courses" optionLabel="name"
+        formControlName="course">
+      </p-dropdown>
+    </div>
+    <div>
+      <h3>Seminary</h3>
+      <p-dropdown showClear="true" placeholder="Select Seminary..." [options]="seminaries" optionLabel="name"
+        formControlName="seminary">
+      </p-dropdown>
+    </div>
+    <div>
+      <h3>Recurrent occurence</h3>
+      <input type="number" formControlName="recurrenceOccurence" />
+    </div>
+    <div>
+      <h3>Recurrent Times</h3>
+      <input type="number" formControlName="recurrenceTimes" />
+    </div>
+    <h3>
+      <p-button label="Add Scheduled Class" type="submit" [disabled]="!isFormValid"></p-button>
+    </h3>
+  </form>
+</section>

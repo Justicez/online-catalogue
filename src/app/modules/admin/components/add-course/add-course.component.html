@@ -1,0 +1,26 @@
+<section>
+  <form [formGroup]="courseForm" (ngSubmit)="onSave()">
+    <div>
+      <h3>Course Name</h3>
+      <input type="text" pInputText formControlName="name" />
+    </div>
+    <div>
+      <h3>Teacher</h3>
+      <p-dropdown placeholder="Select Teacher..." [options]="teachers" optionLabel="firstName"
+        formControlName="teacher"></p-dropdown>
+    </div>
+    <div>
+      <h3>Class Type</h3>
+      <p-dropdown placeholder="Select Class..." [options]="classTypes" optionLabel="name" formControlName="classType">
+      </p-dropdown>
+    </div>
+    <div>
+      <h3>Student Groups</h3>
+      <p-multiSelect [options]="studentGroupList" optionLabel="name" formControlName="studentGroups">
+      </p-multiSelect>
+    </div>
+    <h3>
+      <p-button label="Add Course" type="submit" [disabled]="!isFormValid"></p-button>
+    </h3>
+  </form>
+</section>

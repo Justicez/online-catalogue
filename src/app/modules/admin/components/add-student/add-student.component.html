@@ -1,0 +1,45 @@
+<section>
+  <form [formGroup]="studentForm" (ngSubmit)="onSave()">
+    <div class="p-grid">
+      <div class="p-col-6">
+        <div>
+          <h3>First Name</h3>
+          <input type="text" pInputText formControlName="firstName" />
+        </div>
+        <div>
+          <h3>Last Name</h3>
+          <input type="text" pInputText formControlName="lastName" />
+        </div>
+        <div>
+          <h3>Mother Name</h3>
+          <input type="text" pInputText formControlName="motherName" />
+        </div>
+        <div>
+          <h3>Father Name</h3>
+          <input type="text" pInputText formControlName="fatherName" />
+        </div>
+      </div>
+      <div class="p-col-6">
+        <div>
+          <h3>CNP</h3>
+          <input type="text" pInputText formControlName="cnp" />
+        </div>
+        <div>
+          <h3>Adress</h3>
+          <input type="text" pInputText formControlName="adress" />
+        </div>
+        <div>
+          <h3>Phone Number</h3>
+          <input type="text" pInputText formControlName="phoneNumber" />
+        </div>
+        <div>
+          <h3>Email</h3>
+          <input type="text" pInputText formControlName="email" />
+        </div>
+      </div>
+    </div>
+    <div class="p-grid p-justify-even" style="margin:10px">
+      <p-button label="{{buttonText}}" type="submit" [disabled]="!isFormValid"></p-button>
+    </div>
+  </form>
+</section>

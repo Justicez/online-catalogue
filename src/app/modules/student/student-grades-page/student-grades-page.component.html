@@ -1,0 +1,42 @@
+<div class="p-grid p-justify-center">
+  <div class="p-col-8 p-col-justify-center">
+    <p-accordion multiple="true">
+      <p-accordionTab *ngFor="let grade of studentGrades" header="{{grade.classType}}">
+        <div *ngIf="grade.course !== null" class="p-grid">
+          <div class="p-col-3">
+            Course : {{grade.course.className}}
+          </div>
+          <div class="p-col-3">
+            Grades: <span *ngFor="let item of grade.course.grades">{{item}}; </span>
+          </div>
+          <div class="p-col-2">
+            Exam Grade: {{grade.course.finalExamGrade !== 0 ? grade.course.finalExamGrade: ''}}
+          </div>
+          <div class="p-col-2">
+            Final Grade: {{grade.course.finalGrade !== 0 ? grade.course.finalGrade : ''}}
+          </div>
+          <div class="p-col-2">
+            Attendances: {{grade.seminary.attendances}} / {{grade.seminary.totalAttendances}}
+          </div>
+        </div>
+        <div *ngIf="grade.seminary !== null" class="p-grid">
+          <div class="p-col-3">
+            Seminary : {{grade.seminary.className}}
+          </div>
+          <div class="p-col-3">
+            Grades: <span *ngFor="let item of grade.seminary.grades">{{item}}; </span>
+          </div>
+          <div class="p-col-2">
+            Exam Grade: {{grade.seminary.finalExamGrade !== 0 ? grade.seminary.finalExamGrade : ''}}
+          </div>
+          <div class="p-col-2">
+            Final Grade: {{grade.seminary.finalGrade !== 0 ? grade.seminary.finalGrade : ''}}
+          </div>
+          <div class="p-col-2">
+            Attendances: {{grade.seminary.attendances}} / {{grade.seminary.totalAttendances}}
+          </div>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+</div>

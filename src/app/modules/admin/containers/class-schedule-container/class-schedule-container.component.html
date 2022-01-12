@@ -1,0 +1,46 @@
+<div class="p-grid">
+  <div class="p-col-2">
+    <h3> Class Schedule Planner</h3>
+    <app-add-scheduled-class [courses]="courseList" [seminaries]="seminaryList" (save)="onSave($event)">
+    </app-add-scheduled-class>
+  </div>
+  <div class="p-col-9" style="text-align: center;  ">
+    <h3>Class Schedules</h3>
+    <p-table #dt [columns]="cols" [value]="scheduldedClassesList" [rowHover]="true" [paginator]="true" [rows]="10"
+      [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [filterDelay]="0" [globalFilterFields]="['classType']">
+      <ng-template pTemplate="caption">
+        <div style="text-align: right">
+          <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="50" placeholder="Global Search..."
+            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-class>
+        <tr>
+          <td>{{class.course ? class.course.classType.name : class.seminary.classType.name}}</td>
+          <td>{{class.course? class.course.name : class.seminary.name}}</td>
+          <td>{{class.course ? class.course.teacher.firstName : class.seminary.teacher.firstName}}
+            {{class.course ? class.course.teacher.lastName : class.seminary.teacher.lastName}}</td>
+          <td>{{class.date}}</td>
+          <td>{{class.isExam ? 'Yes' : ''}}</td>
+          <td>{{class.course ? class.course.studentGroups : class.seminary.studentGroups}}</td>
+          <td>
+            <div>
+              <button class="btn" type="button" pButton icon="pi pi-user-edit" label="Edit"></button>
+              <button (click)="onDelete(class.id)" class="btn" type="button" class="ui-button-raised ui-button-danger"
+                pButton icon="pi pi-times" label="Delete"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

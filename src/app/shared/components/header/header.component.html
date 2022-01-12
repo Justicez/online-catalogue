@@ -1,0 +1,7 @@
+<header id="header">
+  <nav class="links" style="--items: 5;">
+    <a *ngFor="let item of headerItems" routerLink="{{item.url}}">{{item.label}}</a>
+    <a class="logout" routerLink="/" (click)="logOut()">Logout</a>
+    <span class="line"></span>
+  </nav>
+</header>

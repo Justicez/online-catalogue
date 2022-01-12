@@ -1,0 +1,96 @@
+<div class="p-grid">
+  <div class="p-col-3">
+    <app-add-class-type (save)="onSaveClassType($event)">
+    </app-add-class-type>
+    <p-table style="text-align: center;" [loading]="loadingType" [value]="classTypeList">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-classType>
+        <tr>
+          <td>{{classType.name}}</td>
+          <td>
+            <div>
+              <button class="btn" type="button" (click)="showEditClassTypeDialog(classType)" pButton
+                icon="pi pi-user-edit" label="Edit"></button>
+              <button class="btn" type="button" class="ui-button-raised ui-button-danger"
+                (click)="onDeleteClassType(classType.id)" pButton icon="pi pi-times" label="Delete"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="p-col-5">
+    <app-add-course [studentGroupList]="theStudentGroups" [teachers]="teacherList" [classTypes]="classTypeList"
+      (save)="onSaveCourse($event)"></app-add-course>
+    <p-table style="text-align: center;" [loading]="loadingCourse" [value]="courseList">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Teacher</th>
+          <th>Class</th>
+          <th>StudentGroups</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-course>
+        <tr>
+          <td>{{course.name}}</td>
+          <td>{{course.teacher.firstName}} {{course.teacher.lastName}}</td>
+          <td>{{course.classType.name}}</td>
+          <td>
+            <span *ngFor="let group of course.studentGroups">
+              {{group.name}};
+            </span>
+          </td>
+          <td>
+            <div>
+              <button class="btn" type="button" (click)="showEditClassTypeDialog(course)" pButton icon="pi pi-user-edit"
+                label="Edit"></button>
+              <button class="btn" type="button" class="ui-button-raised ui-button-danger"
+                (click)="onDeleteCourse(course.id)" pButton icon="pi pi-times" label="Delete"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="p-col-4">
+    <app-add-seminary [studentGroupList]="theStudentGroups" [teachers]="teacherList" [classTypes]="classTypeList"
+      (save)="onSaveSeminary($event)"></app-add-seminary>
+    <p-table style="text-align: center;" [loading]="loadingSeminary" [value]="seminaryList">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Teacher</th>
+          <th>Class</th>
+          <th>StudentGroup</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-seminary>
+        <tr>
+          <td>{{seminary.name}}</td>
+          <td>{{seminary.teacher.firstName}} {{seminary.teacher.lastName}}</td>
+          <td>{{seminary.classType.name}}</td>
+          <td>{{seminary.studentGroup.name}}</td>
+          <td>
+            <div>
+              <button class="btn" type="button" (click)="showEditClassTypeDialog(seminary)" pButton
+                icon="pi pi-user-edit" label="Edit"></button>
+              <button class="btn" type="button" class="ui-button-raised ui-button-danger"
+                (click)="onDeleteSeminary(seminary.id)" pButton icon="pi pi-times" label="Delete"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '30vw'}"></p-confirmDialog>

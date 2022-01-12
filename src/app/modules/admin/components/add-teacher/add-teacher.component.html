@@ -1,0 +1,19 @@
+<section>
+  <form [formGroup]="teacherForm" (ngSubmit)="onSave()">
+    <div>
+      <h3>First Name</h3>
+      <input type="text" pInputText formControlName="firstName" />
+    </div>
+    <div>
+      <h3>Last Name</h3>
+      <input type="text" pInputText formControlName="lastName" />
+    </div>
+    <div>
+      <h3>Email</h3>
+      <input type="text" pInputText formControlName="email" />
+    </div>
+    <h3>
+      <p-button label="{{buttonText}}" type="submit" [disabled]="!isFormValid"></p-button>
+    </h3>
+  </form>
+</section>

@@ -1,0 +1,111 @@
+<div class="p-grid p-justify-end">
+  <button class="btn" type="button" (click)="showAddStudentDialog()" pButton icon="pi pi-user-plus"
+    label=" Add Student"></button>
+</div>
+<div class="p-grid">
+  <div class="p-col-12" style="text-align: center; ">
+    <h3>Student List</h3>
+    <p-table #dt [columns]="colsS" [value]="studentList" [rowHover]="true" [paginator]="true" [rows]="10"
+      [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [filterDelay]="0"
+      [globalFilterFields]="['firstName','lastName']">
+      <ng-template pTemplate="caption">
+        <div style="text-align: right">
+          <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="50" placeholder="Search Student"
+            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-student>
+        <tr>
+          <td>{{student.firstName}}</td>
+          <td>{{student.lastName}}</td>
+          <td>{{student.motherName}}</td>
+          <td>{{student.fatherName}}</td>
+          <td>{{student.cnp}}</td>
+          <td>{{student.adress}}</td>
+          <td>{{student.email}}</td>
+          <td>{{student.phoneNumber}}</td>
+          <td>
+            <div>
+              <button class="btn" type="button" (click)="showEditStudentDialog(student)" pButton icon="pi pi-user-edit"
+                label="Edit"></button>
+              <button class="btn" type="button" class="ui-button-raised ui-button-danger"
+                (click)="onDeleteStudent(student.id)" pButton icon="pi pi-times" label="Delete"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div style="text-align: center;  " class="p-col-12">
+    <div class="p-grid p-justify-end">
+      <button class="btn" type="button" (click)="showAddTeacherDialog()" pButton icon="pi pi-user-plus"
+        label=" Add Teacher"></button>
+    </div>
+    <h3>Teacher List</h3>
+    <p-table #dtt [columns]="colsT" [value]="teacherList" [rowHover]="true" [paginator]="true" [rows]="10"
+      [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [filterDelay]="0"
+      [globalFilterFields]="['firstName','lastName']">
+      <ng-template pTemplate="caption">
+        <div style="text-align: right">
+          <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="50" placeholder="Search Teacher"
+            (input)="dtt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-student>
+        <tr>
+          <td>{{student.firstName}}</td>
+          <td>{{student.lastName}}</td>
+          <td>{{student.email}}</td>
+          <td>
+            <div>
+              <button class="btn" type="button" (click)="showEditTeacherDialog(student)" pButton icon="pi pi-user-edit"
+                label="Edit"></button>
+              <button class="btn" type="button" class="ui-button-raised ui-button-danger"
+                (click)="onDeleteTeacher(student.id)" pButton icon="pi pi-times" label="Delete"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-dialog header="Student Details" [(visible)]="displayAddStudent">
+  <app-add-student (save)="onSave($event)"></app-add-student>
+</p-dialog>
+
+<p-dialog header="Teacher Details" [(visible)]="displayAddTeacher">
+  <app-add-teacher (save)="onSaveTeacher($event)">
+  </app-add-teacher>
+</p-dialog>
+
+<p-dialog header="Student Details" [(visible)]="displayEditStudent">
+  <app-add-student [buttonText]="'Update Student'" [(student)]="selectedStudent" (save)="onUpdate($event)">
+  </app-add-student>
+</p-dialog>
+
+<p-dialog header="Teacher Details" [(visible)]="displayEditTeacher">
+  <app-add-teacher [buttonText]="'Update Teacher'" [(teacher)]="selectedTeacher" (save)="onUpdateTeacher($event)">
+  </app-add-teacher>
+</p-dialog>
+
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '30vw'}"></p-confirmDialog>
